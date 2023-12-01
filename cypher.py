@@ -5,11 +5,14 @@ class cypher():
         self.f = Fernet(self.getKey())
 
     def getKey(self):
-        return open("clave.key","rb").read()
+        key = open("etc/key.key","rb").read()
+        return key
 
     def encrypt(self, oMessage):
-        return self.f.encrypt(oMessage.encode())
+        result = self.f.encrypt(oMessage.encode())
+        return result
 
     def decrypt(self, cMessage):
-        return self.f.decrypt(str(cMessage).encode())
+        result = self.f.decrypt(str(cMessage).encode())
+        return result
 

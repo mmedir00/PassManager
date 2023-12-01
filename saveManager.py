@@ -29,11 +29,23 @@ class saveManager:
             file.write("")
     
     def getUser(self, page):
-        for i in self.getInfo():
-            if i[0] == page:
-                return i[1]
+        user = ""
+        found = False
+        counter = 0
+        while not found and counter < len(self.getInfo()):
+            if self.getInfo()[counter][0] == page:
+                user = self.getInfo()[counter][1]
+                found = True
+            counter += 1
+        return user
             
     def getPass(self, page):
-        for i in self.getInfo():
-            if i[0] == page:
-                return i[2]
+        password = ""
+        found = False
+        counter = 0
+        while not found and counter < len(self.getInfo()):
+            if self.getInfo()[counter][0] == page:
+                password = self.getInfo()[counter][1]
+                found = True
+            counter += 1
+        return password
