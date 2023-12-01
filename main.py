@@ -8,7 +8,7 @@ def main():
         os.system("cls")
     else:
         os.system("clear")
-    path = "passwords.txt"
+    path = "passwords"
     cyph = cypher()
 
     print("-----BIENVENIDO A PASSMANAGER-----\n\n")
