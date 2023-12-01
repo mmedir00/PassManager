@@ -3,6 +3,10 @@ class saveManager:
     def __init__(self, path):
         self.path = path
 
+    def write(self, data):
+        with open(self.path, 'w') as file:
+            file.write(str(data)[2:-1])
+
     def append(self, data):
         with open(self.path, 'a') as file:
             file.write(data)
@@ -45,7 +49,7 @@ class saveManager:
         counter = 0
         while not found and counter < len(self.getInfo()):
             if self.getInfo()[counter][0] == page:
-                password = self.getInfo()[counter][1]
+                password = self.getInfo()[counter][2]
                 found = True
             counter += 1
         return password

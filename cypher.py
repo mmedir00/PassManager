@@ -13,6 +13,7 @@ class cypher():
         return result
 
     def decrypt(self, cMessage):
-        result = self.f.decrypt(str(cMessage).encode())
+        encoded = cMessage.encode()
+        result = self.f.decrypt(encoded)
         return result
 

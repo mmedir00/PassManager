@@ -1,25 +1,31 @@
-from passGenerator import *
-from cypher import *
-from saveManager import *
 import os
 import logging
 from datetime import datetime 
 
+from passGenerator import *
+from cypher import *
+from saveManager import *
+from autentification import *
+
 date = datetime.now().strftime("%Y-%m-%d_%H:%M")
 
 logging.basicConfig(filename=f"logs/{date}.log", level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
- #TODO añadir fecha y hora a los archivos log
-def main():
+
+def clean():
     if os.name == "nt":
         os.system("cls")
     else:
         os.system("clear")
 
+def init():
+
+    clean()
+
     path = "etc/passwords"
     cyph = cypher()
 
     print("-----BIENVENIDO A PASSMANAGER-----\n\n")
-    print("1. Generar contraseña\n2. Guardar contraseña\n3. Ver contraseña\n4. Ver todas\n5. Borrar todas\n\nE. Salir\n")
+    print("1. Generar contraseña\n2. Guardar contraseña\n3. Ver contraseña\n4. Ver todas\n5. Borrar todas\n6. Cambiar contraseña maestra\n\nE. Salir\n")
     option = input("Ingrese una opcion: ")
 
 
@@ -30,7 +36,7 @@ def main():
         logging.info("Password generated")
         input("\nPresione enter para continuar")
 
-        main()
+        init()
 
 
     elif option == "2":
@@ -47,7 +53,7 @@ def main():
             logging.info(page + " password saved")
         input("\nPresione enter para continuar")
 
-        main()
+        init()
     elif option == "3":
         try:
             page = str(input("\nIngrese la pagina: "))
@@ -63,7 +69,7 @@ def main():
             logging.info(page + " password not found")
         input("\nPresione enter para continuar")
 
-        main()
+        init()
 
     elif option == "4":
         print("\n\n\t" +"Pagina".ljust(15, ' ') + "\t║\t" + "Usuario".ljust(15, ' ') + "\t║\t" + "Contraseña".ljust(15, ' '))
@@ -73,7 +79,7 @@ def main():
         logging.warning("All passwords retrieved")
         input("\nPresione enter para continuar")
 
-        main()
+        init()
 
     elif option == "5":
         if (input("\nEsta seguro que desea borrar todas las contraseñas? (y/n): ") == ("y" or "Y") and input("\nToda la información se borrará (y/n): ") == ("y" or "Y")):
@@ -85,7 +91,16 @@ def main():
             print("\nOperacion cancelada")
 
         input("\nPresione enter para continuar")
-        main()
+        init()
+
+    elif option == "6":
+        password = str(input("\nIngrese la nueva contraseña maestra: "))
+        authentification().change(password)
+        logging.warning("Master password changed")
+        print("\nContraseña cambiada con exito")
+        input("\nPresione enter para continuar")
+
+        init()
 
     elif option == ("e" or "E"):
         logging.debug("Program ended")
@@ -96,9 +111,16 @@ def main():
         logging.info("Invalid option")
         input("\nPresione enter para continuar")
 
-        main()
+        init()
 
 
+def passModule():
+    clean()
+    password = str(input("\nIngrese la clave maestra: "))
+    if authentification().check(password):
+        logging.debug("Program started")
+        init()
+    else: 
+        print("Contraseña incorrecta")
 
-logging.debug("Program started")
-main()
+passModule()
