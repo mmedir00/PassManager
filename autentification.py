@@ -10,7 +10,7 @@ class authentification:
         unde = saveManager(self.path).read()
         cyph = cypher()
         decyph = str(cyph.decrypt(unde))
-        if decyph[2:-1] == password:
+        if decyph[2:-1] in [password]:
             return True
         else:
             return False
