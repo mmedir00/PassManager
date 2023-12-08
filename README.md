@@ -1,4 +1,3 @@
-
 # PassManager
 
 A password manager made in python for using in the terminal, it cyphers all your passwords and users. Uses a master password to secure only you can see your passwords, also uses a logger to capture when someone sees your passwords.
@@ -64,3 +63,8 @@ Ingrese una opcion:
 - "e", "E", "exit", "Exit": get out the password manager. 
 
 Some actions may require the master password.
+## Logs
+Logs are used to see the activity of your account.
+
+- See the logs: you can access the logs by opening the logs directory and opening the .log files.
+
